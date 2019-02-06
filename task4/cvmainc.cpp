@@ -149,7 +149,7 @@ void CvMainC::process() {
         t = mean(frame_dayNight);
         avg_int = t[0];
         if ((((cur_time >= 22) || (cur_time >= 0 && cur_time <=7)) && avg_int > 40) || ((cur_time > 7 && cur_time < 22) && avg_int < 40)) {
-            if (flagok_DN == false) {
+            if (!flagok_DN) {
                 flagok_DN = true;
                 if (avg_int > 40) {
                     if (fout_2.open(QIODevice::WriteOnly | QIODevice::Append)) {
@@ -167,7 +167,7 @@ void CvMainC::process() {
                     }
                 }
             }
-            if (flagok_DN == true) {
+            if (flagok_DN) {
                 if (avg_int < 40) {
                     if (avg_int > 10){
                         brightnessAndContrast(frame_original, int(avg_int/2));
@@ -182,7 +182,7 @@ void CvMainC::process() {
                 }
             }
         } else {
-            if (flagok_DN == true) {
+            if (flagok_DN) {
                 flagok_DN = false;
                 if (avg_int < 40) {
                     if (fout_2.open(QIODevice::WriteOnly | QIODevice::Append)) {
@@ -214,7 +214,7 @@ void CvMainC::process() {
         avg_int_2 = t_2[0];
 
         if (avg_int_2 > 4) {
-            if (flagok_BC == false) {
+            if (!flagok_BC) {
                 flagok_BC = true;
                 if (fout_3.open(QIODevice::WriteOnly | QIODevice::Append)) {
                     QTextStream out_3(&fout_3);
@@ -242,7 +242,7 @@ void CvMainC::process() {
                 }
             }
         } else {
-            if (flagok_BC == true) {
+            if (flagok_BC) {
                 flagok_BC = false;
                 if (fout_3.open(QIODevice::WriteOnly | QIODevice::Append)) {
                     QTextStream out_3(&fout_3);
@@ -315,7 +315,7 @@ void CvMainC::process() {
 
                     fndCont(frame_object);
 
-                    if (flagok_AO == true) {
+                    if (flagok_AO) {
                         if (cnt_size != 0) {
                             if (fout_4.open(QIODevice::WriteOnly | QIODevice::Append)) {
                                 QTextStream out_4(&fout_4);
@@ -351,10 +351,10 @@ void CvMainC::process() {
                     }
                 }
             } else {
-                if (flagok_AO2 == true) {
+                if (flagok_AO2) {
                     flagok_AO2 = false;
                 }
-                if (flagok_AO == true) {
+                if (flagok_AO) {
                     flagok_AO = false;
                     counter = 0;
                 }
