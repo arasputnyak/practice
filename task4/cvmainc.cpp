@@ -274,7 +274,7 @@ void CvMainC::process() {
         t_3 = mean(frame_MOG2);
         avg_int_3 = t_3[0];
 
-        if (avg_int_3 > 0.2 || flagok_AO2 == true) {
+        if (avg_int_3 > 0.2 || flagok_AO2) {
 
             for (int x = 0; x < frame_original.rows; x++) {
                 for (int y = 0; y < frame_original.cols; y++) {
@@ -299,7 +299,7 @@ void CvMainC::process() {
             avg_int_h = t_h[0];
 
             if (avg_int_h > 1) {
-                if (flagok_AO2 == false) {
+                if (!flagok_AO2) {
                     flagok_AO2 = true;
                 }
 
